@@ -11,27 +11,36 @@ const client = new pg.Client({
   ssl: settings.ssl
 });
 
+function printFindNameResults(result) {
+
+  const queryOutput = result.rows;
+  console.log(
+    `Found ${queryOutput.length} person(s) by the name '${personsName}':`
+  );
+  for (let i = 0; i < queryOutput.length; i++) {
+    console.log(
+      `- ${i + 1}: ${queryOutput[i].first_name} ${queryOutput[i]
+        .last_name}, born '${queryOutput[i].birthdate}'`
+    );
+  }
+}
+
+const findFamousPeopleWithName = "SELECT  id, first_name, last_name, to_char(birthdate,'YYYY-MM-DD') as birthdate FROM famous_people WHERE first_name = $1::text OR last_name = $1::text";
+
 client.connect(err => {
   if (err) {
     return console.error("Connection Error", err);
   }
+
   console.log("Searching ...");
   client.query(
-    "SELECT  id, first_name, last_name, to_char(birthdate,'YYYY-MM-DD') as birthdate FROM famous_people WHERE first_name = $1::text OR last_name = $1::text",
+    findFamousPeopleWithName,
     [personsName],
     (err, result) => {
       if (err) {
         return console.error("error running query", err);
       }
-
-      const queryOutput = result.rows;
-
-      console.log(`Found ${queryOutput.length} person(s) by the name '${personsName}':`);
-
-      for (let i = 0; i < queryOutput.length; i++) {
-        console.log(`- ${i + 1}: ${queryOutput[i].first_name} ${queryOutput[i].last_name}, born '${queryOutput[i].birthdate}'`);
-      }
-
+      printFindNameResults(result);
       client.end();
     }
   );
