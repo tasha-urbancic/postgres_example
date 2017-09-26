@@ -1,9 +1,8 @@
-// const pg = require("pg");
 const db = require("./db");
 const personsName = process.argv.slice(2)[0];
 
 const settingsKnex = require("./settings_knex");
-var knex = require("knex")(settingsKnex);
+const knex = require("knex")(settingsKnex);
 
 /**
  * Turns timestamp into a since posted time.
@@ -16,11 +15,11 @@ var knex = require("knex")(settingsKnex);
  */
 function formatDate(date) {
 
-  var year = date.getFullYear();
-  var month = date.getMonth() + 1;
-  var day = date.getDate(date);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate(date);
 
-  var formattedTime = year + '/' + month + '/' + day;
+  const formattedTime = year + '/' + month + '/' + day;
   return formattedTime;
 }
 
