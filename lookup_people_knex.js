@@ -14,7 +14,7 @@ var knex = require("knex")(settingsKnex);
  * Returns:
  * @param {} string
  */
-function createDate(date) {
+function formatDate(date) {
 
   var year = date.getFullYear();
   var month = date.getMonth() + 1;
@@ -27,7 +27,7 @@ function createDate(date) {
 function printPerson(personObject, i) {
   console.log(
     `- ${i +
-      1}: ${personObject.first_name} ${personObject.last_name}, born '${createDate(personObject.birthdate)}'`
+      1}: ${personObject.first_name} ${personObject.last_name}, born '${formatDate(personObject.birthdate)}'`
   );
 }
 
