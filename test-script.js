@@ -22,3 +22,5 @@ client.connect((err) => {
     client.end();
   });
 });
+
+console.log('test');
