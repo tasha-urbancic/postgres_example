@@ -3,3 +3,4 @@ node_modules
 settings.json
 settings_knex.json
 knexfile.js
+.DS_Store
