@@ -14,3 +14,5 @@
 //     knex.schema.dropTable("users")
 //   ]);
 // };
+
+// git commit -m "added migration milestone
